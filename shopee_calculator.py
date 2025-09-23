@@ -134,6 +134,7 @@ def main() -> None:
         print("1. Discount Calculator")
         print("2. Delivery Fee Calculator")
         print("3. Seller Earnings Calculator")
+        print("4. Quit")
         choice = input("Enter choice: ").strip().lower()
 
         if choice == "1":
@@ -150,6 +151,10 @@ def main() -> None:
             print("Seller Earnings Calculator is not implemented yet.")
             input("\nPress Enter to return to main menu...")
             clear_screen()
+        elif choice == "4":
+            clear_screen()
+            print("Goodbye!")
+            break  # exit the loop → program ends
         else:
             print("\nInvalid choice. Please try again.\n")
             input("Press Enter to continue...")
