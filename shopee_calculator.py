@@ -25,6 +25,42 @@ def clear_screen() -> None:
         pass
 
 
+# Discount Calculator Feature (CHOICE 1)
+def discount_calculator() -> None:
+
+    # Loop until user chooses to go back to main menu
+    while True:
+        try:
+            original_price = float(input("Enter the original price (RM): "))
+            discount_percent = float(input("Enter the discount percentage (%): "))
+            
+            # Calculation for the final price
+            final_price = original_price * (1 - discount_percent / 100)
+
+            # Show result rounded to 2 decimal places
+            print(f"\nFinal price after {discount_percent}% discount: RM{final_price:.2f}")
+            
+        except ValueError:
+            print("\nInvalid input! Please enter numbers only.")
+            continue
+
+        # Keeps looping until valid input (1 or 2) is given
+        while True:
+            print("\nWhat would you like to do next?")
+            print("1. Calculate again")
+            print("2. Back to main menu")
+            next_choice = input("Enter choice: ").strip()
+
+            if next_choice == "1":
+                clear_screen()
+                break  
+            elif next_choice == "2":
+                return  
+            else:
+                print("\nInvalid choice. Please enter 1 or 2.\n")
+                continue  
+
+
 # Delivery fee parameters (adjust as needed)
 WEST_BASE_FEE = 3.00
 WEST_RATE_PER_KM = 1.00
@@ -88,7 +124,7 @@ def delivery_fee_calculator() -> None:
             print("\nInvalid choice. Returning to main menu.")
             break
 
-
+# Main Menu
 def main() -> None:
     while True:
         clear_screen()
@@ -102,7 +138,7 @@ def main() -> None:
 
         if choice == "1":
             clear_screen()
-            print("Discount Calculator is not implemented yet.")
+            discount_calculator()
             input("\nPress Enter to return to main menu...")
             clear_screen()
         elif choice =="2":
