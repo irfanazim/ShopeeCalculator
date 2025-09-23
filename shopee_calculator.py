@@ -17,16 +17,107 @@ def print_colored_block(text: str, color_code: str) -> None:
         print(f"{color_code}{raw_line}{ANSI_RESET}")
 
 
-def main() -> None:
-    print_colored_block(ASCII_TITLE, ANSI_ORANGE)
-    print()
-    print("Choose a function:")
-    print("1. Discount Calculator")
-    print("2. Delivery Fee Calculator")
-    print("3. Seller Earnings Calculator")
-    # Prompt (no functionality wired yet)
-    input("Enter choice: ")
+def clear_screen() -> None:
+    try:
+        import os
+        os.system("cls" if os.name == "nt" else "clear")
+    except Exception:
+        pass
 
+
+# Delivery fee parameters (adjust as needed)
+WEST_BASE_FEE = 3.00
+WEST_RATE_PER_KM = 1.00
+WEST_RATE_PER_KG = 0.80
+
+EAST_BASE_FEE = 5.00
+EAST_RATE_PER_KM = 1.50  
+EAST_RATE_PER_KG = 1.30
+
+
+def calculate_delivery_fee(region: str, distance_km: float, weight_kg: float) -> float:
+    if region == "West Malaysia":
+        return WEST_BASE_FEE + (WEST_RATE_PER_KM * distance_km) + (WEST_RATE_PER_KG * weight_kg)
+    else:
+        return EAST_BASE_FEE + (EAST_RATE_PER_KM * distance_km) + (EAST_RATE_PER_KG * weight_kg)
+
+
+def delivery_fee_calculator() -> None:
+    while True:
+        print("Select region:")
+        print("1. West Malaysia")
+        print("2. East Malaysia")
+        region_choice = input("Enter choice (1 or 2): ").strip()
+
+        if region_choice == "1":
+            region_name = "West Malaysia"
+            base_fee = WEST_BASE_FEE
+        elif region_choice == "2":
+            region_name = "East Malaysia"
+            base_fee = EAST_BASE_FEE
+        else:
+            print("\nInvalid region choice. Please try again.\n")
+            continue
+
+        try:
+            distance_km = float(input("\nEnter delivery distance (km): ").strip())
+            weight_kg = float(input("Enter parcel weight (kg): ").strip())
+        except ValueError:
+            print("\nInvalid number entered. Please try again.\n")
+            continue
+
+        fee = calculate_delivery_fee(region_name, distance_km, weight_kg)
+
+        print("\n--- Delivery Summary ---")
+        print(f"Region: {region_name}")
+        print(f"Distance: {distance_km:.1f} km")
+        print(f"Weight: {weight_kg:.1f} kg")
+        print(f"Base Fee: RM{base_fee:.2f}")
+        print(f"Delivery Fee = RM{fee:.2f}")
+
+        print("\nWhat would you like to do next?")
+        print("1. Calculate again")
+        print("2. Back to main menu")
+        next_choice = input("Enter choice: ").strip()
+        if next_choice == "1":
+            clear_screen()
+            continue
+        elif next_choice == "2":
+            break
+        else:
+            print("\nInvalid choice. Returning to main menu.")
+            break
+
+
+def main() -> None:
+    while True:
+        clear_screen()
+        print_colored_block(ASCII_TITLE, ANSI_ORANGE)
+        print()
+        print("Choose a function:")
+        print("1. Discount Calculator")
+        print("2. Delivery Fee Calculator")
+        print("3. Seller Earnings Calculator")
+        choice = input("Enter choice: ").strip().lower()
+
+        if choice == "1":
+            clear_screen()
+            print("Discount Calculator is not implemented yet.")
+            input("\nPress Enter to return to main menu...")
+            clear_screen()
+        elif choice =="2":
+            clear_screen()
+            delivery_fee_calculator()
+            clear_screen()
+        elif choice == "3":
+            clear_screen()
+            print("Seller Earnings Calculator is not implemented yet.")
+            input("\nPress Enter to return to main menu...")
+            clear_screen()
+        else:
+            print("\nInvalid choice. Please try again.\n")
+            input("Press Enter to continue...")
+            clear_screen()
 
 if __name__ == "__main__":
     main()
