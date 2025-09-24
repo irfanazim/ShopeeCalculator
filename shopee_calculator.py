@@ -126,6 +126,52 @@ def delivery_fee_calculator() -> None:
             print("\nInvalid choice. Returning to main menu.")
             break
 
+
+# Seller Earnings Calculator Feature (CHOICE 3)
+def seller_earnings_calculator() -> None:
+    while True:
+        try:
+            selling_price = float(input("Enter selling price (RM): ").strip())
+            commission_percent = float(input("Enter platform commission (%): ").strip())
+
+            if selling_price < 0:
+                print("Selling price cannot be negative. Please try again.\n")
+                continue
+            if commission_percent < 0 or commission_percent > 100:
+                print("Commission must be between 0 and 100%. Please try again.\n")
+                continue
+            
+        except ValueError:
+            print("\nInvalid input! Please enter numbers only.\n")
+            continue
+        
+        # Calculation for earnings after commission3
+        commission_amount = selling_price * (commission_percent / 100)
+        earnings = selling_price - commission_amount
+
+
+
+        # Display summary
+        print("\n--- Seller Earnings Summary ---")
+        print(f"Selling Price: RM{selling_price:.2f}")
+        print(f"Platform Commission ({commission_percent:.1f}%): RM{commission_amount:.2f}")
+        print(f"Net Earnings: RM{earnings:.2f}")
+
+        # Next action prompt
+        print("\nWhat would you like to do next?")
+        print("1. Calculate again")
+        print("2. Back to main menu")
+        next_choice = input("Enter choice: ").strip()
+
+        if next_choice == "1":
+            clear_screen()
+            continue
+        elif next_choice == "2":
+            break
+        else:
+            print("\nInvalid choice. Returning to main menu.")
+            break
+
 # Main Menu
 def main() -> None:
     while True:
@@ -150,8 +196,7 @@ def main() -> None:
             clear_screen()
         elif choice == "3":
             clear_screen()
-            print("Seller Earnings Calculator is not implemented yet.")
-            input("\nPress Enter to return to main menu...")
+            seller_earnings_calculator()
             clear_screen()
         elif choice == "4":
             clear_screen()
