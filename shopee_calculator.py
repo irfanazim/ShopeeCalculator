@@ -70,14 +70,14 @@ EAST_BASE_FEE = 5.00
 EAST_RATE_PER_KM = 1.50  
 EAST_RATE_PER_KG = 1.30
 
-
+# Delivery Fee Calculator Feature (CHOICE 2) // Calculation function
 def calculate_delivery_fee(region: str, distance_km: float, weight_kg: float) -> float:
     if region == "West Malaysia":
         return WEST_BASE_FEE + (WEST_RATE_PER_KM * distance_km) + (WEST_RATE_PER_KG * weight_kg)
     else:
         return EAST_BASE_FEE + (EAST_RATE_PER_KM * distance_km) + (EAST_RATE_PER_KG * weight_kg)
 
-
+# Delivery fee calculator loop
 def delivery_fee_calculator() -> None:
     while True:
         print("Select region:")
@@ -104,6 +104,7 @@ def delivery_fee_calculator() -> None:
 
         fee = calculate_delivery_fee(region_name, distance_km, weight_kg)
 
+        # Display summary
         print("\n--- Delivery Summary ---")
         print(f"Region: {region_name}")
         print(f"Distance: {distance_km:.1f} km")
@@ -111,6 +112,7 @@ def delivery_fee_calculator() -> None:
         print(f"Base Fee: RM{base_fee:.2f}")
         print(f"Delivery Fee = RM{fee:.2f}")
 
+        # Next action prompt
         print("\nWhat would you like to do next?")
         print("1. Calculate again")
         print("2. Back to main menu")
