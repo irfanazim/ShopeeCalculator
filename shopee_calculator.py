@@ -110,6 +110,11 @@ def delivery_fee_calculator() -> None:
             print("\nInvalid number entered. Please try again.\n")
             continue
 
+        # Reject negative inputs
+        if distance_km < 0 or weight_kg < 0:
+            print("\nDistance and weight cannot be negative. Please try again.\n")
+            continue
+
         fee = calculate_delivery_fee(region_name, distance_km, weight_kg)
 
         # Display summary
