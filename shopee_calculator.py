@@ -34,6 +34,14 @@ def discount_calculator() -> None:
             original_price = float(input("Enter the original price (RM): "))
             discount_percent = float(input("Enter the discount percentage (%): "))
             
+            # Condition for original price and discount percentage
+            if original_price < 0:
+                print("Original price cannot be negative. Please try again.\n")
+                continue
+            if discount_percent < 0 or discount_percent > 100:
+                print("Discount must be between 0 and 100%. Please try again.\n")
+                continue
+
             # Calculation for the final price
             final_price = original_price * (1 - discount_percent / 100)
 
